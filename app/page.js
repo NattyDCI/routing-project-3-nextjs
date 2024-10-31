@@ -1,10 +1,10 @@
-import NewsPage from "./news/page";
+import Link from "next/link";
 
 export default function HomePage() {
   return (
     <div id="home">
       <h1>The News</h1>
-      <NewsPage />
-    </div>
+      <Link href={"/news"}></Link>      
+      </div>
   );
 }

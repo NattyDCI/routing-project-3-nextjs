@@ -1,49 +1,41 @@
 import Link from "next/link";
 import { getArticles } from "@/lib/articles";
+import NewsarticlesGrid from "@/components/news-articles-grid";
+
+
+// Helper function to format articles
+function generateData(posts) {
+  if (!posts) {
+    throw new Error("No Posts available");
+  }
+
+  return posts.map((article) => ({
+    body: article.body,
+    id: article.id,
+    title: article.title,
+    slug: article.id,
+  }));
+}
 
 
 export default async function NewsPage() {
 
 let posts = await getArticles();
   
-  let ArrayOfArticles = [];
 
-  if (!posts) {
-    throw new Error("No Posts available")
-  }
-
-
-
-    posts.map((article) => {
-    ArrayOfArticles.push({
-      ...ArrayOfArticles,
-      body: article.body,
-      id: article.id,
-      title: article.title,
-      slug: `news/${article.id}`,
-    });
-  });
+generateData(posts);
 
  
 
   return (
-    <div>
+   <>
     <h1>The news</h1>
-    return {
-        <>
-        <div>
-        {ArrayOfArticles.map((article)=>
-        <>
-            <Link href={article.slug}>
-                {article.id}
-            </Link>
-            
-           
-        </>
-        )}
-        </div>
+    <p></p>
+        <NewsarticlesGrid news={posts} />
+          
       </>
-    }
-    </div>
+       
+    
+    
   )
 }
